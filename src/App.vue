@@ -1,12 +1,19 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link>|
-      <router-link to="/basket">Panier</router-link>
-    </div>
+    <HeaderApp></HeaderApp>
     <router-view />
   </div>
 </template>
+
+
+<script>
+import HeaderApp from './components/HeaderApp'
+export default {
+  components: {
+    HeaderApp
+  }
+}
+</script>
 
 <style>
 #app {
