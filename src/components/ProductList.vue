@@ -1,8 +1,5 @@
 <template>
   <section class="listProd">
-    <header class="header">
-      <h1>Nos ours en peluche faits à la main</h1>
-    </header>
     <div class="main">
       <ul class="liste-prod">
         <li class="produit" v-for="teddy in teddies" :key="teddy._id">
