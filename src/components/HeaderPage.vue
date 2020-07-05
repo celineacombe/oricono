@@ -28,14 +28,24 @@ export default {
 }
 </script>
 
-<style>
-.header_home {
-  background-image: url("../assets/images/teddies-family.jpg");
+<style lang="scss">
+header {
+  background-position-y: center;
+  height: 200px;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.8;
 }
-.header_detail {
-  background-image: url("../assets/images/teddies-bear.jpg");
+.header {
+  &_home {
+    background-image: url("../assets/images/teddies-family.jpg");
+  }
+  &_detail {
+    background-image: url("../assets/images/teddies-bear.jpg");
+  }
+  &_basket {
+    background-image: url("../assets/images/basket.jpg");
+  }
 }
-.header_basket {
-  background-image: url("../assets/images/basket.jpg");
-}
-</style>
+</style>>
