@@ -1,10 +1,15 @@
 <template>
-  <div class="AmountOrder">Ici le montant total de la commande</div>
+  <div class="AmountOrder">{{totalAmount}}</div>
 </template>
 
 <script>
 export default {
-name: 'AmountOrder'
+name: 'AmountOrder',
+computed: {
+  totalAmount () {
+    return this.$store.getters.totalAmount
+  }
+}
 }
 </script>
 

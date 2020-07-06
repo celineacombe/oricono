@@ -9,7 +9,7 @@
           <option v-for="color in teddy.colors" :key="color">{{color}}</option>
         </select>
         <p class="teddyPrice">Prix: {{teddy.price}}</p>
-        <button class="panier">Ajouter au panier</button>
+        <button class="panier" @click="addToBasket">Ajouter au panier</button>
       </header>
       <div class="detail">
         <p class="teddyName">Nom :{{teddy.name}}</p>
@@ -57,6 +57,11 @@ data () {
     //     console.log(error)
     //   }
 
+  },
+  methods: {
+    addToBasket() {
+      this.$store.dispatch('addToBasket', this.teddy)
+    }
   }
 }
 
