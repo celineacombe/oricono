@@ -5,18 +5,25 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    basket: []
+    basket: [],
+    lastOrderId: ''
   },
   mutations: {
     addToBasket(state, teddy) {
       console.log('Mutation Add to BAsket')
       state.basket.push(teddy)
+    },
+    setLastOrderId(state, orderId) {
+      state.lastOrderId = orderId
     }
   },
   actions: {
     addToBasket(context, teddy) {
       console.log('Action Add to BAsket')
       context.commit('addToBasket', teddy)
+    },
+    setLastOrderId(context, orderId) {
+      context.commit('setLastOrderId', orderId)
     }
   },
   getters: {
@@ -30,6 +37,9 @@ export default new Vuex.Store({
         sum += product.price
       }
       return sum
+    },
+    lastOrderId: state => {
+      return state.lastOrderId
     }
   }
 })
