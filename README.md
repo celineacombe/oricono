@@ -1,4 +1,4 @@
-# oricono
+# orinoco
 
 ## Project setup
 ```
