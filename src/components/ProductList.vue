@@ -24,7 +24,7 @@ data () {
           loading: true,
           errored: false
       }},
-      mounted () {
+mounted () {
     axios
       .get('http://localhost:3000/api/teddies')
       .then(response => {

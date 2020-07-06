@@ -2,10 +2,12 @@
 <template>
   <section class="basket">
     <HeaderPage :headerClass="'basket'" :titre="'Votre panier'"></HeaderPage>
-    <div class="main">
+    <div>
       <BasketDetail></BasketDetail>
     </div>
-    <Contact></Contact>
+    <div>
+      <Contact></Contact>
+    </div>
   </section>
 </template>
 
@@ -22,7 +24,8 @@ export default {
     HeaderPage,
     BasketDetail,
     Contact
-  }
+  },
+  
 }
 </script>
 
