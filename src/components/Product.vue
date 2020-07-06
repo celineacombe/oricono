@@ -7,9 +7,7 @@
         <!-- <p class="teddyDescription">Description:{{teddy.description}}</p> -->
         <!-- <p class="teddyColors">Disponible dans les couleurs :{{teddy.colors}}</p> -->
         <p class="teddyPrice">Prix: {{teddy.price}}</p>
-        <button class="selection" @click="goToDetail">
-          <router-link :to="'/detail/'+teddy._id">Voir cet article</router-link>
-        </button>
+        <router-link :to="'/detail/'+teddy._id" tag="button">Voir cet article</router-link>
         <br />
       </li>
     </ul>
