@@ -2,12 +2,11 @@
 <template>
   <section class="basket">
     <HeaderPage :headerClass="'basket'" :titre="'Votre panier'"></HeaderPage>
-    <div>
+    <div v-if="basket.length>0">
       <BasketDetail></BasketDetail>
-    </div>
-    <div>
       <Contact></Contact>
     </div>
+    <div v-else>Oh là là ton panier est vide</div>
   </section>
 </template>
 
@@ -25,7 +24,11 @@ export default {
     BasketDetail,
     Contact
   },
-  
+  computed: {
+    basket () {
+      return this.$store.getters.basket
+    }
+  }
 }
 </script>
 
