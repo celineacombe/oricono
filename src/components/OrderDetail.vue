@@ -6,7 +6,7 @@
         <th>Couleur</th>
         <th>Prix</th>
       </tr>
-      <tr v-for="teddy in basket" :key="teddy._id">
+      <tr v-for="(teddy,index) in basket" :key="teddy._id+'_'+index">
         <td>{{teddy.name}}</td>
         <td>{{teddy.colors}}</td>
         <td>{{teddy.price}}</td>

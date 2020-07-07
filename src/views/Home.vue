@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <HeaderPage :headerClass="'home'" :titre="'Nos ours en peluche faits à la main'"></HeaderPage>
-    <ProductList msg="Welcome to Your Vue.js App" />
+    <ProductList/>
   </div>
 </template>
 
