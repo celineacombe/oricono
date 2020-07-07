@@ -7,14 +7,21 @@
 <script>
 export default {
 name: 'ThankOrder',
+data () {
+  return {
+    totalAmount: 0
+  }
+},
+mounted () {
+this.totalAmount = this.$store.getters.totalAmount
+this.$store.dispatch('emptyBasket')
+},
 computed: {
   orderId () {
     return this.$store.getters.lastOrderId
-  },
-  totalAmount () {
-    return this.$store.getters.totalAmount
   }
-}
+
+},
 }
 </script>
 

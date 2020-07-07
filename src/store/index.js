@@ -15,6 +15,9 @@ export default new Vuex.Store({
     },
     setLastOrderId(state, orderId) {
       state.lastOrderId = orderId
+    },
+    emptyBasket(state) {
+      state.basket.splice(0, state.basket.length)
     }
   },
   actions: {
@@ -24,6 +27,9 @@ export default new Vuex.Store({
     },
     setLastOrderId(context, orderId) {
       context.commit('setLastOrderId', orderId)
+    },
+    emptyBasket(context) {
+      context.commit('emptyBasket')
     }
   },
   getters: {
