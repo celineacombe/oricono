@@ -27,19 +27,19 @@
 import axios from 'axios'
 
 export default {
-    name: 'Contact',
-    data () {
-      return {
-        contact: {
-          firstName:'',
-          lastName: '',
-          address: '',
-          city: '',
-          email: ''
-        }
+  name: 'Contact',
+  data () {
+    return {
+      contact: {
+        firstName:'',
+        lastName: '',
+        address: '',
+        city: '',
+        email: ''
       }
-    },
-    methods:  {
+    }
+  },
+  methods:  {
     checkoutOrder (event) {
       event.preventDefault()
       console.log('checkoutOrder')
@@ -49,35 +49,37 @@ export default {
       let invoice = {
         products: [],
         contact: {
-
         }
       }
       for(let product of basket) {
         invoice.products.push(product._id)
-
       }
       // 2 générer l'objet contact
-      invoice.contact=this.contact
-
-      console.log(invoice)
-      // envoi au serveur
-axios
-.post('http://localhost:3000/api/teddies/order', invoice)
-.then(response => {
-  let orderId = response.data.orderId
-  console.log(orderId)
-  // open THanks.vue 
-  this.$store.dispatch('setLastOrderId', orderId)
-     this.$router.push('Thanks')
-      })
-.catch(error => {
-  console.log(error)
-})
-
-
-      // ouvrir la view Thanks
-
-
+      if (
+        this.contact.firstName === '' ||
+        this.contact.lastName === ''  ||
+        this.contact.address === ''  ||
+        this.contact.city === ''  ||
+        this.contact.email === ''  ||
+        invoice.products.length === 0){
+        console.log('error validation')
+      } else {
+        invoice.contact=this.contact
+        console.log(invoice)
+        // envoi au serveur
+        axios
+        .post('http://localhost:3000/api/teddies/order', invoice)
+        .then(response => {
+          let orderId = response.data.orderId
+          console.log(orderId)
+          // open THanks.vue 
+          this.$store.dispatch('setLastOrderId', orderId)
+            this.$router.push('Thanks')
+              })
+        .catch(error => {
+          console.log(error)
+        })
+      }
     }   
   }
 }
