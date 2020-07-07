@@ -4,22 +4,19 @@
       Vos coordonnées
       <br />
       <label for="firstName">Prénom :</label>
-      <input type="text" id="firstName" name="firstName" v-model="contact.firstName" />
+      <input type="text" id="firstName" name="firstName" v-model="contact.firstName" required />
       <br />
       <label for="lastName">Nom :</label>
-      <input type="text" id="lastName" name="lastName" v-model="contact.lastName" />
+      <input type="text" id="lastName" name="lastName" v-model="contact.lastName" required />
       <br />
       <label for="address">Adresse :</label>
-      <input type="text" id="address" name="address" v-model="contact.address" />
-      <br />
-      <label for="postalCode">Code postal :</label>
-      <input type="number" id="postalCode" name="postalCode" />
+      <input type="text" id="address" name="address" v-model="contact.address" required />
       <br />
       <label for="city">Ville :</label>
-      <input type="text" id="city" name="city" v-model="contact.city" />
+      <input type="text" id="city" name="city" v-model="contact.city" required />
       <br />
       <label for="email">Adresse électronique :</label>
-      <input type="email" id="email" name="email" v-model="contact.email" />
+      <input type="email" id="email" name="email" v-model="contact.email" required />
       <br />
       <button class @click="checkoutOrder">Valider la commande</button>
     </form>
