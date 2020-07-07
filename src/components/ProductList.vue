@@ -1,13 +1,11 @@
 <template>
-  <section class="listProd">
-    <div class="main">
-      <ul class="liste-prod">
-        <li class="produit" v-for="teddy in teddies" :key="teddy._id">
-          <Product :teddy="teddy"></Product>
-        </li>
-      </ul>
-    </div>
-  </section>
+  <b-container fluid>
+    <b-row align-h="around">
+      <b-card-group deck>
+        <Product :teddy="teddy" v-for="teddy in teddies" :key="teddy._id"></Product>
+      </b-card-group>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
