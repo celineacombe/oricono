@@ -1,13 +1,11 @@
 <template>
-  <b-card title="Card Title" no-body>
-    <b-card-header header-tag="nav">
-      <b-nav card-header pills fill>
-        <b-nav-item disabled>CVG</b-nav-item>
-        <b-nav-item disabled>Mentions Légales</b-nav-item>
-        <b-nav-item disabled>Politique de confidentialité</b-nav-item>
-        <b-nav-item disabled>Contact</b-nav-item>
-      </b-nav>
-    </b-card-header>
+  <b-card body-bg-variant="light">
+    <b-row class="text-center">
+      <b-col>CVG</b-col>
+      <b-col>Mentions Légales</b-col>
+      <b-col>Politique de confidentialité</b-col>
+      <b-col>Contact</b-col>
+    </b-row>
   </b-card>
 </template>
 
