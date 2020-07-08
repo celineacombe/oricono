@@ -1,9 +1,9 @@
 <template>
-  <div id="app">
+  <b-container fluid>
     <HeaderApp></HeaderApp>
     <router-view />
     <FooterApp></FooterApp>
-  </div>
+  </b-container>
 </template>
 
 
