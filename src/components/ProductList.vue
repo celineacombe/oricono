@@ -1,11 +1,9 @@
 <template>
-  <b-container fluid>
-    <b-row align-h="around">
-      <b-card-group deck>
-        <Product :teddy="teddy" v-for="teddy in teddies" :key="teddy._id"></Product>
-      </b-card-group>
-    </b-row>
-  </b-container>
+  <b-row align-h="around" align-v="center">
+    <b-card-group deck>
+      <Product :teddy="teddy" v-for="teddy in teddies" :key="teddy._id"></Product>
+    </b-card-group>
+  </b-row>
 </template>
 
 <script>
@@ -38,4 +36,7 @@ mounted () {
 </script>
 
 <style>
+.card-deck {
+  margin-top: 20px;
+}
 </style>
