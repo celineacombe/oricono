@@ -1,5 +1,36 @@
 <template>
-  <div class="productDetail">
+  <b-row class="justify-content-md-center">
+    <b-card no-body class="overflow-hidden" style="max-width: 1025px;">
+      <b-row no-gutters>
+        <b-col md="6">
+          <b-card-img :src="teddy.imageUrl" alt="Image" class="rounded-0"></b-card-img>
+        </b-col>
+        <b-col md="6">
+          <b-card-body :title="teddy.name">
+            <b-card-text>
+              <select name id class="choixCouleur">
+                <option>Couleur</option>
+                <option v-for="color in teddy.colors" :key="color">{{color}}</option>
+              </select>
+              <p class="teddyPrice">Prix : {{teddy.price}}</p>
+              <p>
+                <b-button class="panier" variant="primary" @click="addToBasket">Ajouter au panier</b-button>
+              </p>
+              <p class="teddyDescription">Description:{{teddy.description}}</p>
+              <p class="teddyColors">
+                Disponible dans les couleurs :
+                <span
+                  v-for="color in teddy.colors"
+                  :key="color"
+                >&nbsp;{{color}}</span>
+              </p>
+            </b-card-text>
+          </b-card-body>
+        </b-col>
+      </b-row>
+    </b-card>
+  </b-row>
+  <!-- <div class="productDetail">
     <section>
       <header>
         <img class="teddyImage" :src="teddy.imageUrl" />
@@ -24,7 +55,7 @@
         </p>
       </div>
     </section>
-  </div>
+  </div>-->
 </template>
 
 <script>
@@ -68,7 +99,4 @@ data () {
 </script>
 
 <style scoped>
-.teddyImage {
-  width: 150px;
-}
 </style>
