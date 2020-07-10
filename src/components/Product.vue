@@ -13,7 +13,7 @@
     <b-card-text>
       {{teddy.description}}
       <br />
-      {{teddy.price}}
+      {{formatedPrice}}
     </b-card-text>
 
     <b-button :to="'/detail/'+teddy._id" variant="primary">Voir cet article</b-button>
@@ -22,6 +22,7 @@
 
 <script>
 // import axios from 'axios'
+import {formatPrice} from '@/functions'
 export default {
 name: 'Product',
 props:{teddy:{
@@ -31,6 +32,11 @@ data () {
       return {
     
       }},
+computed: {
+formatedPrice () {
+  return formatPrice(this.teddy.price)
+}
+},
     
   methods: {
       //goToDetail(): 

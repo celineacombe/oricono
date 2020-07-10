@@ -12,7 +12,7 @@
                 <option>Couleur</option>
                 <option v-for="color in teddy.colors" :key="color">{{color}}</option>
               </select>
-              <p class="teddyPrice">Prix : {{teddy.price}}</p>
+              <p class="teddyPrice">Prix : {{formatPriceLocal(teddy.price)}}</p>
               <p>
                 <b-button class="panier" variant="primary" @click="addToBasket">Ajouter au panier</b-button>
               </p>
@@ -60,6 +60,7 @@
 
 <script>
 import axios from 'axios'
+import {formatPrice} from '@/functions'
 export default {
     name: 'ProductDetail',
 data () {
@@ -69,17 +70,17 @@ data () {
           loading: true,
           errored: false
       }},
-      mounted () {
-    axios
-      .get('http://localhost:3000/api/teddies/'+this.id)
-      .then(response => {
-        this.teddy = response.data
-      })
-        .catch(error => {
-          console.log(error)
-          this.errored = true
-        })
-        .finally(() => this.loading = false)
+mounted () {
+  axios
+    .get('http://localhost:3000/api/teddies/'+this.id)
+    .then(response => {
+      this.teddy = response.data
+    })
+    .catch(error => {
+      console.log(error)
+      this.errored = true
+    })
+    .finally(() => this.loading = false)
 
     //   try {
     //       let response = await axios.get('http://localhost:3000/api/teddies')
@@ -92,6 +93,9 @@ data () {
   methods: {
     addToBasket() {
       this.$store.dispatch('addToBasket', this.teddy)
+    },
+    formatPriceLocal(price) {
+      return formatPrice(price)
     }
   }
 }

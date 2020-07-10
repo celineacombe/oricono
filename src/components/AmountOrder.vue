@@ -12,11 +12,12 @@
 </template>
 
 <script>
+import {formatPrice } from '@/functions'
 export default {
 name: 'AmountOrder',
 computed: {
   totalAmount () {
-    return this.$store.getters.totalAmount
+    return formatPrice(this.$store.getters.totalAmount)
   }
 }
 }

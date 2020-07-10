@@ -12,6 +12,7 @@
         head-variant="dark"
         table-variant="primary"
       >
+        <template v-slot:cell(price)="row">{{formatPriceLocal(row.item.price)}}</template>
         <template v-slot:cell(show_details)="row">
           <b-button
             size="sm"
@@ -42,6 +43,7 @@
 </template>
 
 <script>
+import {formatPrice} from '@/functions'
 export default {
 name: 'OrderDetail',
 data () {
@@ -71,6 +73,11 @@ data () {
 computed: {
   basket () {
     return this.$store.getters.basket
+  }
+},
+methods: {
+  formatPriceLocal(price) {
+    return formatPrice(price)
   }
 }
 }

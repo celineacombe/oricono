@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import {formatPrice} from '@/functions'
 export default {
 name: 'ThankOrder',
 data () {
@@ -15,7 +16,7 @@ data () {
   }
 },
 mounted () {
-this.totalAmount = this.$store.getters.totalAmount
+this.totalAmount = formatPrice(this.$store.getters.totalAmount)
 this.$store.dispatch('emptyBasket')
 },
 computed: {
