@@ -1,8 +1,8 @@
 <template>
   <b-form-row class="justify-content-md-center">
-    <b-card bg-variant="light" class="col-md-6">
+    <b-card bg-variant="light" class="col-md-8">
       <b-form-group
-        label-cols-lg="3"
+        label-cols-lg="4"
         label="Vos coordonnées"
         label-size="lg"
         label-class="font-weight-bold pt-0"
