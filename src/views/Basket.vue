@@ -6,7 +6,15 @@
       <BasketDetail></BasketDetail>
       <Contact></Contact>
     </div>
-    <div v-else>Oh là là ton panier est vide</div>
+    <div v-else>
+      <b-row class="justify-content-md-center">
+        <b-card class="col-md-8">
+          <b-card-text>Votre panier est actuellement vide !</b-card-text>
+
+          <b-button :to="'/'" variant="primary">Commencer vos achats</b-button>
+        </b-card>
+      </b-row>
+    </div>
   </section>
 </template>
 
