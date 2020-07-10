@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <div>Merci pour votre commande n° {{orderId}} d'un montant de {{totalAmount}}</div>
-  </div>
+  <b-row class="justify-content-md-center">
+    <b-card class="col-md-8">
+      <b-card-text>Merci pour votre commande n° {{orderId}} d'un montant de {{totalAmount}}</b-card-text>
+    </b-card>
+  </b-row>
 </template>
 
 <script>
