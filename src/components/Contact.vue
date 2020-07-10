@@ -1,5 +1,5 @@
 <template>
-  <b-form-row class="justify-content-md-center">
+  <b-row class="justify-content-md-center">
     <b-card bg-variant="light" class="col-md-8">
       <b-form-group
         label-cols-lg="4"
@@ -61,7 +61,7 @@
         </b-form-group>
       </b-form-group>
     </b-card>
-  </b-form-row>
+  </b-row>
 
   <!-- <form action class="contact">
       Vos coordonnées

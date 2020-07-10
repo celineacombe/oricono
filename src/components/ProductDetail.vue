@@ -3,7 +3,7 @@
     <b-card no-body class="overflow-hidden" style="max-width: 1025px;">
       <b-row no-gutters>
         <b-col md="6">
-          <b-card-img :src="teddy.imageUrl" alt="Image" class="rounded-0"></b-card-img>
+          <b-card-img :src="teddy.imageUrl" alt="Image" class="rounded-0" align="center"></b-card-img>
         </b-col>
         <b-col md="6">
           <b-card-body :title="teddy.name">
@@ -98,5 +98,9 @@ data () {
 
 </script>
 
-<style scoped>
+<style>
+.rounded-0 {
+  margin-left: 0px;
+  padding-left: 20px;
+}
 </style>

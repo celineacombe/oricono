@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer fixed-bottom">
+  <b-footer class="footer fixed-bottom">
     <b-card body-bg-variant="light">
       <b-row class="text-center">
         <b-col>CVG</b-col>
@@ -8,7 +8,7 @@
         <b-col>Contact</b-col>
       </b-row>
     </b-card>
-  </footer>
+  </b-footer>
 </template>
 
 <script>
