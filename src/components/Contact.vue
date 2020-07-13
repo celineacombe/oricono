@@ -15,7 +15,14 @@
           label-align-sm="right"
           label-for="nested-lastName"
         >
-          <b-form-input id="lastName" v-model="contact.lastName" required></b-form-input>
+          <b-form-input
+            id="lastName"
+            v-model="contact.lastName"
+            :state="lastNameState"
+            placeholder="Veuillez saisir votre nom"
+            trim
+            required
+          ></b-form-input>
         </b-form-group>
 
         <b-form-group
@@ -25,7 +32,14 @@
           label-align-sm="right"
           label-for="nested-firstName"
         >
-          <b-form-input id="firstName" v-model="contact.firstName" required></b-form-input>
+          <b-form-input
+            id="firstName"
+            v-model="contact.firstName"
+            :state="firstNameState"
+            placeholder="Veuillez saisir votre prénom"
+            trim
+            required
+          ></b-form-input>
         </b-form-group>
 
         <b-form-group
@@ -35,8 +49,32 @@
           label-align-sm="right"
           label-for="nested-address"
         >
-          <b-form-input id="address" v-model="contact.address" required></b-form-input>
+          <b-form-input
+            id="address"
+            v-model="contact.address"
+            :state="addressState"
+            placeholder="Veuillez saisir votre adresse (n° + nom de la voie)"
+            trim
+            required
+          ></b-form-input>
         </b-form-group>
+        <b-form-group
+          label-cols-sm="3"
+          label-cols-lg="2"
+          label="Code postal :"
+          label-align-sm="right"
+          label-for="nested-city"
+        >
+          <b-form-input
+            id="zipCode"
+            v-model="contact.zipCode"
+            :state="zipCodeState"
+            placeholder="Veuillez saisir votre code postal"
+            trim
+            required
+          ></b-form-input>
+        </b-form-group>
+
         <b-form-group
           label-cols-sm="3"
           label-cols-lg="2"
@@ -44,7 +82,13 @@
           label-align-sm="right"
           label-for="nested-city"
         >
-          <b-form-input id="city" v-model="contact.city" required></b-form-input>
+          <b-form-input
+            id="city"
+            v-model="contact.city"
+            :state="cityState"
+            placeholder="Veuillez saisir votre ville"
+            trimrequired
+          ></b-form-input>
         </b-form-group>
 
         <b-form-group
@@ -54,7 +98,14 @@
           label-align-sm="right"
           label-for="nested-email"
         >
-          <b-form-input id="email" v-model="contact.email" required></b-form-input>
+          <b-form-input
+            id="email"
+            v-model="contact.email"
+            :state="emailState"
+            placeholder="Veuillez saisir votre email"
+            trim
+            required
+          ></b-form-input>
         </b-form-group>
         <b-form-group label-cols-sm="3" label-cols-lg="2" label-align-sm="right">
           <b-button type="submit" variant="primary" @click="checkoutOrder">Valider la commande</b-button>
@@ -62,27 +113,6 @@
       </b-form-group>
     </b-card>
   </b-row>
-
-  <!-- <form action class="contact">
-      Vos coordonnées
-      <br />
-      <label for="firstName">Prénom :</label>
-      <input type="text" id="firstName" name="firstName" v-model="contact.firstName" required />
-      <br />
-      <label for="lastName">Nom :</label>
-      <input type="text" id="lastName" name="lastName" v-model="contact.lastName" required />
-      <br />
-      <label for="address">Adresse :</label>
-      <input type="text" id="address" name="address" v-model="contact.address" required />
-      <br />
-      <label for="city">Ville :</label>
-      <input type="text" id="city" name="city" v-model="contact.city" required />
-      <br />
-      <label for="email">Adresse électronique :</label>
-      <input type="email" id="email" name="email" v-model="contact.email" required />
-      <br />
-      <button class @click="checkoutOrder">Valider la commande</button>
-  </form>-->
 </template>
 
 <script>
@@ -96,6 +126,7 @@ export default {
         firstName:'',
         lastName: '',
         address: '',
+        zipCode:'',
         city: '',
         email: ''
       }
@@ -142,9 +173,51 @@ export default {
           console.log(error)
         })
       }
-    }   
+    },
+    // Validation des nom et prénom
+    checkName (strToCheck) {
+      const regex = RegExp ("^[A-ZÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]('[A-ZÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ])?[a-zàáâäçèéêëìíîïñòóôöùúûü]+([ -][A-Za-zÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙàáâäçèéêëìíîïñòóôöùúûü]('[A-ZÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ])?[a-zàáâäçèéêëìíîïñòóôöùúûü]+)*$")
+      return regex.test(strToCheck)
+    },
+    checkAddress (strToCheck) {
+      const regexAddress = RegExp ("^[A-Za-z0-9ÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙàáâäçèéêëìíîïñòóôöùúûü -',.]+$")
+      return regexAddress.test(strToCheck)
+    },
+    checkZipCode (strToCheck) {
+      const regexZipCode = RegExp ("^[0-9]{5}$")
+      return regexZipCode.test(strToCheck)
+    },
+    checkCity (strToCheck) {
+      const regexCity = RegExp("^[A-ZÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]('[A-ZÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ])?[a-zàáâäçèéêëìíîïñòóôöùúûü]+([ -][A-Za-zÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙàáâäçèéêëìíîïñòóôöùúûü]('[A-ZÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ])?[a-zàáâäçèéêëìíîïñòóôöùúûü]+)*$")
+      return regexCity.test(strToCheck)
+   },
+    checkEmail (strToCheck) {
+      const regexEmail = RegExp ("[a-z]")
+      return regexEmail.test(strToCheck)
+    }
+  },
+  computed: {
+    lastNameState () {
+      return this.checkName(this.contact.lastName)
+    },
+    firstNameState () {
+      return this.checkName(this.contact.firstName)
+    },
+    addressState () {
+      return this.checkAddress(this.contact.address)
+    },
+    zipCodeState () {
+      return this.checkZipCode(this.contact.zipCode)
+    },
+    cityState () {
+      return this.checkCity(this.contact.city)
+    },
+    emailState () {
+      return this.checkEmail(this.contact.email)
+    }
   }
 }
+
 </script>
 
 <style>
