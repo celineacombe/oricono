@@ -14,12 +14,14 @@
           label="Nom :"
           label-align-sm="right"
           label-for="nested-lastName"
+          invalid-feedback="Format du nom incorrect"
+          :state="lastNameState"
         >
           <b-form-input
             id="lastName"
             v-model="contact.lastName"
+            placeholder="Veuillez saisir votre nom (Mettre une majuscule)"
             :state="lastNameState"
-            placeholder="Veuillez saisir votre nom"
             trim
             required
           ></b-form-input>
@@ -31,12 +33,14 @@
           label="Prénom :"
           label-align-sm="right"
           label-for="nested-firstName"
+          invalid-feedback="Format du prénom incorrect"
+          :state="firstNameState"
         >
           <b-form-input
             id="firstName"
             v-model="contact.firstName"
             :state="firstNameState"
-            placeholder="Veuillez saisir votre prénom"
+            placeholder="Veuillez saisir votre prénom (Mettre une majuscule)"
             trim
             required
           ></b-form-input>
@@ -48,12 +52,14 @@
           label="Adresse :"
           label-align-sm="right"
           label-for="nested-address"
+          invalid-feedback="Format de l'adresse incorrect"
+          :state="addressState"
         >
           <b-form-input
             id="address"
             v-model="contact.address"
             :state="addressState"
-            placeholder="Veuillez saisir votre adresse (n° + nom de la voie)"
+            placeholder="Veuillez saisir votre adresse"
             trim
             required
           ></b-form-input>
@@ -64,6 +70,8 @@
           label="Code postal :"
           label-align-sm="right"
           label-for="nested-city"
+          invalid-feedback="Format du code postal incorrect"
+          :state="zipCodeState"
         >
           <b-form-input
             id="zipCode"
@@ -81,6 +89,8 @@
           label="Ville :"
           label-align-sm="right"
           label-for="nested-city"
+          invalid-feedback="Format du ville incorrect"
+          :state="cityState"
         >
           <b-form-input
             id="city"
@@ -97,6 +107,8 @@
           label="Email :"
           label-align-sm="right"
           label-for="nested-email"
+          invalid-feedback="Format du email incorrect"
+          :state="emailState"
         >
           <b-form-input
             id="email"
@@ -123,12 +135,12 @@ export default {
   data () {
     return {
       contact: {
-        firstName:'',
-        lastName: '',
-        address: '',
-        zipCode:'',
-        city: '',
-        email: ''
+        firstName: null,
+        lastName: null,
+        address: null,
+        zipCode: null,
+        city: null,
+        email: null
       }
     }
   },
@@ -192,29 +204,54 @@ export default {
       return regexCity.test(strToCheck)
    },
     checkEmail (strToCheck) {
-      const regexEmail = RegExp ("[a-z]")
+      const regexEmail = RegExp (/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
       return regexEmail.test(strToCheck)
     }
   },
   computed: {
     lastNameState () {
-      return this.checkName(this.contact.lastName)
+      if (this.contact.lastName === null){
+        return null
+      }else {
+        return this.checkName(this.contact.lastName)
+      }
     },
     firstNameState () {
-      return this.checkName(this.contact.firstName)
+      if (this.contact.firstName === null){
+        return null
+      }else {
+        return this.checkName(this.contact.firstName)
+      }
     },
     addressState () {
-      return this.checkAddress(this.contact.address)
+      if (this.contact.address === null){
+        return null
+      }else {
+        return this.checkAddress(this.contact.address)
+      }
     },
     zipCodeState () {
-      return this.checkZipCode(this.contact.zipCode)
+       if (this.contact.zipCode === null){
+        return null
+      }else {
+        return this.checkZipCode(this.contact.zipCode)
+      }
     },
     cityState () {
-      return this.checkCity(this.contact.city)
+       if (this.contact.city === null){
+        return null
+      }else {
+        return this.checkCity(this.contact.city)
+      }
     },
     emailState () {
-      return this.checkEmail(this.contact.email)
-    }
+       if (this.contact.email === null){
+        return null
+      }else {
+        return this.checkEmail(this.contact.email)
+      }
+    },
+  
   }
 }
 
