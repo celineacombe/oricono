@@ -1,6 +1,6 @@
 <template>
   <b-row class="justify-content-md-center">
-    <b-card no-body class="overflow-hidden" style="max-width: 1025px;">
+    <b-card no-body class="overflow-hidden" style="max-width: 1025px;" v-if="loaded">
       <b-row no-gutters>
         <b-col md="6">
           <b-card-img :src="teddy.imageUrl" alt="Image" class="rounded-0" align="center"></b-card-img>
@@ -8,10 +8,13 @@
         <b-col md="6">
           <b-card-body :title="teddy.name">
             <b-card-text>
-              <select name id class="choixCouleur">
+              {{selectedColor}}
+              <b-form-select v-model="selectedColor" :options="teddy.colors"></b-form-select>
+
+              <!-- <select name id class="choixCouleur">
                 <option>Couleur</option>
                 <option v-for="color in teddy.colors" :key="color">{{color}}</option>
-              </select>
+              </select>-->
               <p class="teddyPrice">Prix : {{formatPriceLocal(teddy.price)}}</p>
               <p>
                 <b-button class="panier" variant="primary" @click="addToBasket">Ajouter au panier</b-button>
@@ -30,32 +33,6 @@
       </b-row>
     </b-card>
   </b-row>
-  <!-- <div class="productDetail">
-    <section>
-      <header>
-        <img class="teddyImage" :src="teddy.imageUrl" />
-        <h1 class="productName">{{teddy.name}}</h1>
-        <select name id class="choixCouleur">
-          <option>Couleur</option>
-          <option v-for="color in teddy.colors" :key="color">{{color}}</option>
-        </select>
-        <p class="teddyPrice">Prix: {{teddy.price}}</p>
-        <button class="panier" @click="addToBasket">Ajouter au panier</button>
-      </header>
-      <div class="detail">
-        <p class="teddyName">Nom :{{teddy.name}}</p>
-        <p class="teddyId">Rérférence :{{teddy._id}}</p>
-        <p class="teddyDescription">Description:{{teddy.description}}</p>
-        <p class="teddyColors">
-          Disponible dans les couleurs :
-          <span
-            v-for="color in teddy.colors"
-            :key="color"
-          >&nbsp;{{color}}</span>
-        </p>
-      </div>
-    </section>
-  </div>-->
 </template>
 
 <script>
@@ -67,20 +44,26 @@ data () {
       return {
           teddy: {},
           id: this.$route.params.id,
+          selectedColor: '',
           loading: true,
-          errored: false
+          errored: false,
+          loaded: false
       }},
 mounted () {
   axios
     .get('http://localhost:3000/api/teddies/'+this.id)
     .then(response => {
       this.teddy = response.data
+      console.log('teddy', this.teddy)
     })
     .catch(error => {
       console.log(error)
       this.errored = true
     })
-    .finally(() => this.loading = false)
+    .finally(() => {
+      this.loading = false
+      this.loaded = true
+      })
 
     //   try {
     //       let response = await axios.get('http://localhost:3000/api/teddies')
@@ -92,7 +75,12 @@ mounted () {
   },
   methods: {
     addToBasket() {
-      this.$store.dispatch('addToBasket', this.teddy)
+      console.log('AddToBasket ' + this.selectedColor)
+      console.log('detail Teddy', this.teddy)
+      let item = Object.assign({}, this.teddy)
+      item.selectedColor=this.selectedColor
+      item.quantity=1
+      this.$store.dispatch('addToBasket', item)
     },
     formatPriceLocal(price) {
       return formatPrice(price)
