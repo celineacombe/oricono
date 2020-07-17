@@ -8,14 +8,10 @@
         <b-col md="6">
           <b-card-body :title="teddy.name">
             <b-card-text>
-              Couleur(s) disponible(s)
-              <b-form-select v-model="selectedColor" :options="teddy.colors"></b-form-select>
-
-              <!-- <select name id class="choixCouleur">
-                <option>Couleur</option>
-                <option v-for="color in teddy.colors" :key="color">{{color}}</option>
-              </select>-->
-              <p class="teddyPrice">Prix : {{formatPriceLocal(teddy.price)}}</p>
+              <b-col md="6">
+                Couleur(s) disponible(s)
+                <b-form-select v-model="selectedColor" :options="teddy.colors"></b-form-select>
+              </b-col>
               <b-col md="6">
                 Quantité
                 <b-form-input type="number" min="1" max="10" v-model="selectedQuantity"></b-form-input>
@@ -73,13 +69,6 @@ mounted () {
       this.loading = false
       this.loaded = true
       })
-
-    //   try {
-    //       let response = await axios.get('http://localhost:3000/api/teddies')
-    //       this.teddies = response.data
-    //   } catch (error) {
-    //     console.log(error)
-    //   }
 
   },
   methods: {
