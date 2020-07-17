@@ -119,6 +119,8 @@
             trim
             required
           ></b-form-input>
+          {{errorMsg}}
+          <!-- <b-toast id="example-toast" title="BootstrapVue" static no-auto-hide>{{errorMsg}}</b-toast> -->
         </b-form-group>
         <b-form-group label-cols-sm="3" label-cols-lg="2" label-align-sm="right">
           <b-button type="submit" variant="primary" @click="checkoutOrder">Valider la commande</b-button>
@@ -142,7 +144,8 @@ export default {
         zipCode: null,
         city: null,
         email: null
-      }
+      },
+      errorMsg:''
     }
   },
   methods:  {
@@ -162,13 +165,25 @@ export default {
       }
       // 2 générer l'objet contact
       if (
-        this.contact.firstName === '' ||
+        this.contact.firstName === '' || 
+        this.contact.firstName === null || 
         this.contact.lastName === ''  ||
+        this.contact.lastName === null  ||
         this.contact.address === ''  ||
+        this.contact.address === null  ||
         this.contact.city === ''  ||
+        this.contact.city === null  ||
         this.contact.email === ''  ||
+        this.contact.email === null  ||
         invoice.products.length === 0){
         console.log('error validation')
+        this.errorMsg="Erreur de validation"
+        this.$bvToast.toast("Votre formulaire est mal renseigné", {
+          title: 'Votre commande ne peut pas être validée',
+          variant: 'danger',
+          autoHideDelay: 5000,
+          appendToast: true
+        })
       } else {
         invoice.contact=this.contact
         console.log(invoice)
