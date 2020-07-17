@@ -16,6 +16,13 @@
                 <option v-for="color in teddy.colors" :key="color">{{color}}</option>
               </select>-->
               <p class="teddyPrice">Prix : {{formatPriceLocal(teddy.price)}}</p>
+              <b-col md="6">
+                Quantité
+                <b-form-input type="number" min="1" max="10" v-model="selectedQuantity"></b-form-input>
+              </b-col>
+              <b-col md="6">
+                <p class="teddyPrice">Prix : {{formatPriceLocal(teddy.price)}}</p>
+              </b-col>
               <p>
                 <b-button class="panier" variant="primary" @click="addToBasket">Ajouter au panier</b-button>
               </p>
@@ -45,6 +52,7 @@ data () {
           teddy: {},
           id: this.$route.params.id,
           selectedColor: '',
+          selectedQuantity: 1,
           loading: true,
           errored: false,
           loaded: false
@@ -80,7 +88,7 @@ mounted () {
       console.log('detail Teddy', this.teddy)
       let item = Object.assign({}, this.teddy)
       item.selectedColor=this.selectedColor
-      item.quantity=1
+      item.quantity=this.selectedQuantity
       this.$store.dispatch('addToBasket', item)
     },
     formatPriceLocal(price) {
