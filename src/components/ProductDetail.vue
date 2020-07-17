@@ -8,7 +8,7 @@
         <b-col md="6">
           <b-card-body :title="teddy.name">
             <b-card-text>
-              {{selectedColor}}
+              Couleur(s) disponible(s)
               <b-form-select v-model="selectedColor" :options="teddy.colors"></b-form-select>
 
               <!-- <select name id class="choixCouleur">
@@ -48,13 +48,14 @@ data () {
           loading: true,
           errored: false,
           loaded: false
-      }},
+          }},
 mounted () {
   axios
     .get('http://localhost:3000/api/teddies/'+this.id)
     .then(response => {
       this.teddy = response.data
       console.log('teddy', this.teddy)
+      this.selectedColor=this.teddy.colors[0]
     })
     .catch(error => {
       console.log(error)
