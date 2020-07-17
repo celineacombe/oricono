@@ -78,6 +78,7 @@
             v-model="contact.zipCode"
             :state="zipCodeState"
             placeholder="Veuillez saisir votre code postal"
+            maxlength="5"
             trim
             required
           ></b-form-input>
@@ -188,7 +189,7 @@ export default {
     },
     // Validation des nom et prénom
     checkName (strToCheck) {
-      const regex = RegExp ("^[A-ZÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]('[A-ZÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ])?[a-zàáâäçèéêëìíîïñòóôöùúûü]+([ -][A-Za-zÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙàáâäçèéêëìíîïñòóôöùúûü]('[A-ZÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ])?[a-zàáâäçèéêëìíîïñòóôöùúûü]+)*$")
+      const regex = RegExp ("^[A-Za-zÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙàáâäçèéêëìíîïñòóôöùúûü -']{2,}$")
       return regex.test(strToCheck)
     },
     checkAddress (strToCheck) {
@@ -196,11 +197,11 @@ export default {
       return regexAddress.test(strToCheck)
     },
     checkZipCode (strToCheck) {
-      const regexZipCode = RegExp ("^[0-9]{5}$")
+      const regexZipCode = RegExp ("^[0-9]{5,5}$")
       return regexZipCode.test(strToCheck)
     },
     checkCity (strToCheck) {
-      const regexCity = RegExp("^[A-ZÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ]('[A-ZÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ])?[a-zàáâäçèéêëìíîïñòóôöùúûü]+([ -][A-Za-zÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙàáâäçèéêëìíîïñòóôöùúûü]('[A-ZÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙ])?[a-zàáâäçèéêëìíîïñòóôöùúûü]+)*$")
+      const regexCity = RegExp("^[A-Za-zÂÊÎÔÛÄËÏÖÜÀÆÇÉÈŒÙàáâäçèéêëìíîïñòóôöùúûü -']+$")
       return regexCity.test(strToCheck)
    },
     checkEmail (strToCheck) {
