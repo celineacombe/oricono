@@ -26,9 +26,12 @@
               <p class="teddyColors">
                 Disponible dans les couleurs :
                 <span
-                  v-for="color in teddy.colors"
+                  v-for="(color, index) in teddy.colors"
                   :key="color"
-                >&nbsp;{{color}}</span>
+                >
+                  <span v-if="index===0">{{color}}</span>
+                  <span v-else>&nbsp;/&nbsp;{{color}}</span>
+                </span>
               </p>
             </b-card-text>
           </b-card-body>
@@ -82,7 +85,8 @@ mounted () {
     },
     formatPriceLocal(price) {
       return formatPrice(price)
-    }
+    },
+   
   }
 }
 
