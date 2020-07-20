@@ -7,6 +7,7 @@
         striped
         bordered
         borderless
+        fixed
         :items="basket"
         :fields="fields"
         head-variant="dark"
@@ -15,6 +16,10 @@
         <template v-slot:cell(price)="row">{{formatPriceLocal(row.item.price)}}</template>
         <template v-slot:cell(totalPrice)="row">{{formatPriceLocal(row.item.totalPrice)}}</template>
 
+        <template v-slot:cell(name)="row">
+          <b-link :to="'/detail/'+row.item._id" active-class="disabled">{{row.item.name}}</b-link>
+        </template>
+
         <template v-slot:cell(quantity)="row">
           {{row.item.quantity}}
           <b-button
@@ -22,6 +27,7 @@
             @click="increment(row.item._id, row.item.selectedColor)"
             class="mr-2"
           >+</b-button>
+
           <b-button
             size="sm"
             @click="decrement(row.item._id, row.item.selectedColor)"
@@ -85,7 +91,7 @@ data () {
       },
       { 
         key: 'selectedColor',
-        label: 'selectedColor',
+        label: 'Couleur',
         sortable: false,
       },     
       { 
