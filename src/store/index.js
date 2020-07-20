@@ -66,6 +66,36 @@ export default new Vuex.Store({
         console.log('objet non trouvé dans le panier')
       }
     },
+    changeQuantity(state, payload) {
+      let id = payload.id
+      let selectedColor = payload.selectedColor
+      let i = 0
+      let found = false
+      let indexToRemove = -1
+      let quantity = payload.quantity
+      console.log("changeQuantity")
+      while (i < state.basket.length && !found) {
+        if (state.basket[i]._id === id && state.basket[i].selectedColor === selectedColor) {
+          //on a trouvé le bon objet
+          found = true
+          indexToRemove = i
+        } else {
+          //on n'a pas trouvé le bon objet
+        }
+        i++
+      }
+      if (indexToRemove != -1) {
+        state.basket[indexToRemove].quantity += quantity
+        if (state.basket[indexToRemove].quantity > 0) {
+          state.basket[indexToRemove].totalPrice = state.basket[indexToRemove].price * state.basket[indexToRemove].quantity
+        } else {
+          console.log("quantity = 0 , panier vide")
+          state.basket.splice(indexToRemove, 1)
+        }
+      } else {
+        console.log("objet non trouvé")
+      }
+    }
   },
   actions: {
     addToBasket(context, payload) {
@@ -81,6 +111,14 @@ export default new Vuex.Store({
     },
     removeProduct(context, payload) {
       context.commit('removeProduct', payload)
+    },
+    incrementProduct(context, payload) {
+      payload.quantity = 1
+      context.commit('changeQuantity', payload)
+    },
+    decrementProduct(context, payload) {
+      payload.quantity = -1
+      context.commit('changeQuantity', payload)
     }
   },
   getters: {
@@ -98,6 +136,5 @@ export default new Vuex.Store({
     lastOrderId: state => {
       return state.lastOrderId
     },
-
   }
 })

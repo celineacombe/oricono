@@ -15,6 +15,20 @@
         <template v-slot:cell(price)="row">{{formatPriceLocal(row.item.price)}}</template>
         <template v-slot:cell(totalPrice)="row">{{formatPriceLocal(row.item.totalPrice)}}</template>
 
+        <template v-slot:cell(quantity)="row">
+          {{row.item.quantity}}
+          <b-button
+            size="sm"
+            @click="increment(row.item._id, row.item.selectedColor)"
+            class="mr-2"
+          >+</b-button>
+          <b-button
+            size="sm"
+            @click="decrement(row.item._id, row.item.selectedColor)"
+            class="mr-2"
+          >-</b-button>
+        </template>
+
         <template v-slot:cell(show_details)="row">
           <b-button
             size="sm"
@@ -78,7 +92,9 @@ data () {
         key: 'quantity',
         label: 'Quantité',
         sortable: false,
+        type: Number,
       },
+      
       {
         key: 'price',
         label: 'Prix',
@@ -118,7 +134,14 @@ methods: {
     console.log(id)
     console.log(selectedColor)
     this.$store.dispatch('removeProduct', {id: id, selectedColor:selectedColor})
+  },
+  increment(id, selectedColor){
+    this.$store.dispatch('incrementProduct', {id: id, selectedColor:selectedColor})
+  },
+  decrement(id, selectedColor) {
+    this.$store.dispatch('decrementProduct', {id: id, selectedColor:selectedColor})
   }
+  
 }
 }
 
